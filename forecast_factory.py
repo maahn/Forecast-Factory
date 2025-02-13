@@ -193,7 +193,7 @@ def fieldWithBoundary(A, xb, yb, headline=None):
 st.write("# Forecast Factory: Vorbereitung")
 
 st.write("## Das Gitter")
-st.image("raster.png")
+st.image("raster.jpg")
 st.write("#### 👉 Merkt euch, welcher Gitterpunkt  ihr seid!")
 
 
