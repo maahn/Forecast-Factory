@@ -176,47 +176,7 @@ def plotTemp(
     return fig
 
 
-def nth_repl(s, sub, repl, nth):
-    find = s.find(sub)
-    # if find is not p1 we have found at least one match for the substring
-    i = find != -1
-    # loop util we find the nth or we find no match
-    while find != -1 and i != nth:
-        # find + 1 means we start at the last match start index + 1
-        find = s.find(sub, find + 1)
-        i += 1
-    # if i  is equal to nth we found nth matches so replace
-    if i == nth:
-        return s[:find] + repl + s[find + len(sub) :]
-    return s
-
-
-def printField(A, headline=None):
-    # display(pn.DataFrame(np.around(A,2),columns=x/1000,index=y/1000))
-    htmlStr = A.round(2).to_html()
-    return htmlStr
-    # htmlStr = nth_repl(
-    #     htmlStr,
-    #     "<th>0.0</th>",
-    #     "<th rowspan=4 style='text-align: center;'>Nord-Süd [km]</th>     <th>0</th>",
-    #     2,
-    # )
-    # htmlStr = htmlStr.replace("<th></th>", "<th></th><th></th>")
-    # if headline is None:
-    #     htmlStr = htmlStr.replace(
-    #         "<thead>",
-    #         "<thead>    <tr>      <th></th><th colspan=5 style='text-align: center;'>Ost-West [km]</th>    </tr>",
-    #     )
-    # else:
-    #     htmlStr = htmlStr.replace(
-    #         "<thead>",
-    #         "<thead>    <tr>      <th>%s</th><th colspan=5 style='text-align: center;'>Ost-West [km]</th>    </tr>"
-    #         % headline,
-    #     )
-    # return htmlStr
-
-
-def printFieldBoundary(A, xb, yb, headline=None):
+def fieldWithBoundary(A, xb, yb, headline=None):
     Aplus = np.zeros((A.shape[0] + 1, A.shape[1] + 1))
     Aplus[1:, 1:] = A
     Aplus[0, 1:] = yb
@@ -227,34 +187,14 @@ def printFieldBoundary(A, xb, yb, headline=None):
 
     # display(pn.DataFrame(Aplus,columns=col,index=ind))
 
-    htmlStr = pn.DataFrame(np.around(Aplus, 2), columns=col, index=ind).to_html()
-    htmlStr = htmlStr.replace("<th></th>", "<th></th><th></th>")
-    if headline is None:
-        htmlStr = htmlStr.replace(
-            "<thead>",
-            "<thead>    <tr>      <th></th><th colspan=6 style='text-align: center;'>Ost-West [km]</th>    </tr>",
-        )
-    else:
-        htmlStr = htmlStr.replace(
-            "<thead>",
-            "<thead>    <tr>      <th>%s</th><th colspan=6 style='text-align: center;'>Ost-West [km]</th>    </tr>"
-            % headline,
-        )
-    htmlStr = nth_repl(
-        htmlStr,
-        "<th>-100.0</th>",
-        "<th rowspan=5 style='text-align: center;'>Nord-Süd [km]</th>     <th>-100</th>",
-        2,
-    )
-    #     print htmlStr
-    return htmlStr
+    return pn.DataFrame(np.around(Aplus, 2), columns=col, index=ind)
 
 
 st.write("# Forecast Factory: Vorbereitung")
 
 st.write("## Das Gitter")
 st.image("raster.png")
-st.write("#### Merkt euch, welcher Gitterpunkt  ihr seid!")
+st.write("#### 👉 Merkt euch, welcher Gitterpunkt  ihr seid!")
 
 
 st.write("## Stark Vereinfachte Vorhersagegleichung")
@@ -284,20 +224,25 @@ st.dataframe(
     v,
 )
 
-st.write("#### Schreibt die Windgeschwindigkeit für euren Gitterpunkt auf!")
+
+st.write("#### 👉 Schreibt euch die Windgeschwindigkeit für euren Gitterpunkt auf!")
 
 
 st.write("## Temperatur um 8:00")
 st.pyplot(plotTemp(T[0], title1="Temperatur (T$_{8:00}$, t=0)"))
 
 st.dataframe(T[0])
-st.write("#### Schreibt die Temperatur für euren Gitterpunkt auf!")
+st.write("#### 👉 Schreibt euch die Temperatur für euren Gitterpunkt auf!")
+
+# for tt in range(nsteps):
+#     st.write(tt)
+#     st.dataframe(fieldWithBoundary(Tinit.values, xbound[tt], ybound[tt]))
 
 
 st.write("# Forecast Factory: Rechnung")
 
 for nn in range(1, nsteps):
-    st.write(f"### Temperaturänderung {time[nn-1]} -> {time[nn]} Uhr")
+    st.write(f"### 👉 Berechnet die Temperaturänderung {time[nn-1]} -> {time[nn]} Uhr")
 
     T[nn] = st.data_editor(T[nn], key=f"time{nn}")
     st.pyplot(
