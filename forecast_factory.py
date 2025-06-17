@@ -208,7 +208,7 @@ st.write("## Windfeld")
 st.pyplot(plotWind(u, v))
 
 st.write(
-    "Der Wind $\\vec{V}$ ist eigentlich ein Vektor mit den Komponenten West $u$ and Süd $v$ "
+    "Der Wind $\\vec{V}$ ist eigentlich ein Vektor mit den Komponenten West $u$ und Süd $v$ "
 )
 st.latex("\\vec{V} = \\begin{bmatrix}u \\\\ v \\end{bmatrix}")
 st.pyplot(plotWind(u, v, split=True))
@@ -242,7 +242,7 @@ st.write("#### 👉 Schreibt euch die Temperatur für euren Gitterpunkt auf!")
 st.write("# Forecast Factory: Rechnung")
 
 for nn in range(1, nsteps):
-    st.write(f"### 👉 Berechnet die Temperaturänderung {time[nn-1]} -> {time[nn]} Uhr")
+    st.write(f"### 👉 Berechnet die Temperatur um {time[nn]} Uhr!")
 
     T[nn] = st.data_editor(T[nn], key=f"time{nn}")
     st.pyplot(
