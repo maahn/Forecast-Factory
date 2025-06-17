@@ -200,7 +200,7 @@ st.write("#### 👉 Merkt euch, welcher Gitterpunkt  ihr seid!")
 st.write("## Stark Vereinfachte Vorhersagegleichung")
 # st.image("equation.png")
 st.latex(
-    "T_{Zukunft} = T_{Jetzt} - \\Big(\\frac{\\Delta t}{\\Delta x} \\cdot \\Big\\{(u \\cdot [T_{Jetzt} - T_{jetzt, Westen}]) + (v \\cdot [T_{Jetzt} - T_{jetzt, Norden}]) \\Big\\}\\Big)"
+    "T_{\mathrm{Zukunft}} = T_{\mathrm{jetzt}} - \\Big(\\frac{\\Delta t}{\\Delta x} \\cdot \\Big\\{(u \\cdot [T_\mathrm{{jetzt}} - T_\mathrm{{jetzt, Westen}}]) + (v \\cdot [T_\mathrm{{jetzt}} - T_\mathrm{{jetzt, Norden}}]) \\Big\\}\\Big)"
 )
 
 
