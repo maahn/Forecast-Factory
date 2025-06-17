@@ -294,6 +294,9 @@ for n in range(1, nsteps):  # Time Loop
                 Tref[n - 1].iloc[i, j], Twest, Tnord, u.iloc[i, j], v.iloc[i, j], dt, dx
             )
     st.write(f"### Schritt {n} um {time[n]} Uhr")
+    st.write(f"#### Schüler")
+    st.dataframe(T[n])  # print values calculated by students
+    st.write(f"#### Computer")
     st.dataframe(Tref[n])  # print results
 
     st.pyplot(
