@@ -151,7 +151,7 @@ def plotTemp(
             cm = sp.pcolormesh(
                 xBorder,
                 yBorder,
-                np.ma.masked_invalid(T1 - T2),
+                np.ma.masked_invalid(T2 - T1),
                 vmin=-5,
                 vmax=5,
                 cmap="PRGn",
