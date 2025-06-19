@@ -151,7 +151,7 @@ def plotTemp(
             cm = sp.pcolormesh(
                 xBorder,
                 yBorder,
-                np.ma.masked_invalid(T1 - T2),
+                np.ma.masked_invalid(T2 - T1),
                 vmin=-5,
                 vmax=5,
                 cmap="PRGn",
@@ -200,7 +200,7 @@ st.write("#### 👉 Merkt euch, welcher Gitterpunkt  ihr seid!")
 st.write("## Stark Vereinfachte Vorhersagegleichung")
 # st.image("equation.png")
 st.latex(
-    "T_{Zukunft} = T_{Jetzt} - \\Big(\\frac{\\Delta t}{\\Delta x} \\cdot \\Big\\{(u \\cdot [T_{Jetzt} - T_{jetzt, Westen}]) + (v \\cdot [T_{Jetzt} - T_{jetzt, Norden}]) \\Big\\}\\Big)"
+    "T_{\mathrm{Zukunft}} = T_{\mathrm{jetzt}} - \\Big(\\frac{\\Delta t}{\\Delta x} \\cdot \\Big\\{(u \\cdot [T_\mathrm{{jetzt}} - T_\mathrm{{jetzt, Westen}}]) + (v \\cdot [T_\mathrm{{jetzt}} - T_\mathrm{{jetzt, Norden}}]) \\Big\\}\\Big)"
 )
 
 
@@ -208,7 +208,7 @@ st.write("## Windfeld")
 st.pyplot(plotWind(u, v))
 
 st.write(
-    "Der Wind $\\vec{V}$ ist eigentlich ein Vektor mit den Komponenten West $u$ and Süd $v$ "
+    "Der Wind $\\vec{V}$ ist eigentlich ein Vektor mit den Komponenten West $u$ und Süd $v$ "
 )
 st.latex("\\vec{V} = \\begin{bmatrix}u \\\\ v \\end{bmatrix}")
 st.pyplot(plotWind(u, v, split=True))
@@ -242,7 +242,7 @@ st.write("#### 👉 Schreibt euch die Temperatur für euren Gitterpunkt auf!")
 st.write("# Forecast Factory: Rechnung")
 
 for nn in range(1, nsteps):
-    st.write(f"### 👉 Berechnet die Temperaturänderung {time[nn-1]} -> {time[nn]} Uhr")
+    st.write(f"### 👉 Berechnet die Temperatur um {time[nn]} Uhr!")
 
     T[nn] = st.data_editor(T[nn], key=f"time{nn}")
     st.pyplot(
@@ -294,6 +294,9 @@ for n in range(1, nsteps):  # Time Loop
                 Tref[n - 1].iloc[i, j], Twest, Tnord, u.iloc[i, j], v.iloc[i, j], dt, dx
             )
     st.write(f"### Schritt {n} um {time[n]} Uhr")
+    st.write(f"#### Schüler")
+    st.dataframe(T[n])  # print values calculated by students
+    st.write(f"#### Computer")
     st.dataframe(Tref[n])  # print results
 
     st.pyplot(
