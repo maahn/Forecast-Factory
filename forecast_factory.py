@@ -305,6 +305,6 @@ for n in range(1, nsteps):  # Time Loop
             Tref[n],
             title1="Schüler (%s)" % time[n],
             title2="Computer (%s)" % time[n],
-            plotDiff=False,
+            plotDiff=True,
         )
     )
