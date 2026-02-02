@@ -1,5 +1,5 @@
 matplotlib
 numpy
 pandas
-streamlit
+streamlit>=1.53
 xarray
