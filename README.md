@@ -6,6 +6,7 @@ Charlton-Perez, A., and H. Dacre, 2011: Lewis fry richardson’s forecast factor
 Run locally with 
 ```
 git clone https://github.com/maahn/Forecast-Factory
+cd Forecast-Factory
 pip install -r requirements.txt
 streamlit run forecast_factory.py
 ```
