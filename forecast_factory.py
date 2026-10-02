@@ -218,10 +218,16 @@ st.write("### Wind von Westen u [km/h]:")
 
 st.dataframe(
     u,
+    column_config={
+        col: st.column_config.Column(alignment="center") for col in v.columns
+    },
 )
 st.write("### Wind von Süden v [km/h]:")
 st.dataframe(
     v,
+    column_config={
+        col: st.column_config.Column(alignment="center") for col in v.columns
+    },
 )
 
 
@@ -231,7 +237,12 @@ st.write("#### 👉 Schreibt euch die Windgeschwindigkeit für euren Gitterpunkt
 st.write("## Temperatur um 8:00")
 st.pyplot(plotTemp(T[0], title1="Temperatur (T$_{8:00}$, t=0)"))
 
-st.dataframe(T[0])
+st.dataframe(
+    T[0],
+    column_config={
+        col: st.column_config.Column(alignment="center") for col in v.columns
+    },
+)
 st.write("#### 👉 Schreibt euch die Temperatur für euren Gitterpunkt auf!")
 
 # for tt in range(nsteps):
@@ -244,7 +255,13 @@ st.write("# Forecast Factory: Rechnung")
 for nn in range(1, nsteps):
     st.write(f"### 👉 Berechnet die Temperatur um {time[nn]} Uhr!")
 
-    T[nn] = st.data_editor(T[nn], key=f"time{nn}")
+    T[nn] = st.data_editor(
+        T[nn],
+        key=f"time{nn}",
+        column_config={
+            col: st.column_config.Column(alignment="center") for col in T[nn].columns
+        },
+    )
     st.pyplot(
         plotTemp(
             T[nn - 1],
@@ -264,8 +281,7 @@ def futureTemp(T, Twest, Tnord, u, v, dt, dx):
     A = dt / dx
     B = u * (T - Twest)
     C = v * (T - Tnord)
-    D = B + C
-    return T - (A * D)
+    return T - (A * (B + C)))
         """
 )
 
@@ -295,9 +311,19 @@ for n in range(1, nsteps):  # Time Loop
             )
     st.write(f"### Schritt {n} um {time[n]} Uhr")
     st.write(f"#### Schüler")
-    st.dataframe(T[n])  # print values calculated by students
+    st.dataframe(
+        T[n],
+        column_config={
+            col: st.column_config.Column(alignment="center") for col in v.columns
+        },
+    )  # print values calculated by students
     st.write(f"#### Computer")
-    st.dataframe(Tref[n])  # print results
+    st.dataframe(
+        Tref[n],
+        column_config={
+            col: st.column_config.Column(alignment="center") for col in v.columns
+        },
+    )  # print results
 
     st.pyplot(
         plotTemp(
